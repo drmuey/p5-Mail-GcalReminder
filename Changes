@@ -1,5 +1,8 @@
 Revision history for Mail-GcalReminder
 
+???
+    - Update erroneous references to XML (XML is deprecated by Google so v0.5 was good!)
+
 0.5  Sun Dec 28 21:29:11 2014
     - fix prereq NS
     - Switch full/ Atom to use ical for reliability

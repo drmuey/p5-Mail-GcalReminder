@@ -126,7 +126,7 @@ sub get_gcal {
         my $url  = "http://www.google.com/calendar/ical/$gcal/basic.ics?$query_string$addt";
         my $path = $gcal;
         $path =~ s{/}{_slash_}g;
-        my $file = $self->workdir . "/$path.xml";                                                                                                                                                # TODO: make portable via File::Spec
+        my $file = $self->workdir . "/$path.ics";                                                                                                                                                # TODO: make portable via File::Spec
         my $res = $self->http->mirror( $url, $file );
         if ( !$res->{success} ) {
             die "Could not fetch “$url”: $res->{reason}\n";
@@ -541,17 +541,17 @@ The send_reminders() configuration hashref has the following keys:
 
 The calendar whose events you are interested in.
 
-The value is part of the XML (under “Calendar Details” in your google calendar UI).
+The value is part of the iCal (under “Calendar Details” in your google calendar UI).
 
-Take the URL and remove 'https://www.google.com/calendar/feeds/' from the beggining and '/basic' from the end.
+Take the URL and remove 'https://www.google.com/calendar/feeds/' from the beggining and '/basic.ics' from the end.
 
 B<For example>:
 
-If your public XML URL is: https://www.google.com/calendar/feeds/6qrhpfk1utcs97g9u2o27g5ojo%40group.calendar.google.com/public/basic
+If your public iCal URL is: https://www.google.com/calendar/feeds/6qrhpfk1utcs97g9u2o27g5ojo%40group.calendar.google.com/public/basic.ics
 
 Then the value to 'gcal' is: 6qrhpfk1utcs97g9u2o27g5ojo%40group.calendar.google.com/public
 
-If your private XML URL is: https://www.google.com/calendar/feeds/6qrhpfk1utcs97g9u2o27g5ojo%40group.calendar.google.com/private-a6689d558b4dbba8942e510985b604d3/basic
+If your private iCal URL is: https://www.google.com/calendar/feeds/6qrhpfk1utcs97g9u2o27g5ojo%40group.calendar.google.com/private-a6689d558b4dbba8942e510985b604d3/basic.ics
 
 Then the value to 'gcal' is: 6qrhpfk1utcs97g9u2o27g5ojo%40group.calendar.google.com/private-a6689d558b4dbba8942e510985b604d3';
 
@@ -705,7 +705,15 @@ Errors beyond those are not directly from this module.
 
 L<Moo>
 
+L<Role::Multiton::New>
+
 L<Email::Send::SMTP::Gmail>
+
+L<iCal::Parser>
+
+L<File::Temp>
+
+L<HTML::Tiny>
 
 L<DateTime>
 
@@ -715,13 +723,7 @@ L<Carp>
 
 L<DateTime::Format::ISO8601>
 
-L<HTTP::Tiny>
-
-L<XML::Simple>
-
-L<Temp::File>
-
-For Testing: L<Test::More>, L<Net::Detect>, L<Test::Warn>
+For Testing: L<Test::More>, L<Test::Deep>, L<Net::Detect>, L<Test::Warn>
 
 =head1 TODO
 
