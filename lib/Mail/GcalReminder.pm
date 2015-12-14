@@ -116,7 +116,7 @@ sub get_gcal {
     if ( !exists $cache->{$gcal} ) {
 
         my $q_end = $self->base_date->clone;
-        $q_end->add( days => 42 );    # TODO: start-max via object
+        $q_end->add( years => 1 );    # TODO: start-max via object
 
         my $query_string = 'orderby=starttime&sortorder=a&start-min=' . $self->base_date->format_cldr('yyyy-MM-dd') . '&start-max=' . $q_end->format_cldr('yyyy-MM-dd') . '&max-results=100';    # TODO: max via object
 
